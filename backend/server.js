@@ -22,6 +22,12 @@ app.use(helmet());
 // log all API requests to the console
 app.use(morgan("dev"));
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Routes
+app.use("/v1/api/auth", require("./routes/userRoutes"));
+
 // Handle errors
 app.use(handleError);
 app.use(notFound);
