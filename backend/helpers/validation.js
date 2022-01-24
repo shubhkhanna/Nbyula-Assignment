@@ -23,4 +23,16 @@ const validateRegisterData = [
     .withMessage("Password must be at least 6 characters long!"),
 ];
 
-module.exports = { validationCheck, validateRegisterData };
+// Login Data Validation
+const validateLoginData = [
+  check("email").normalizeEmail().isEmail().withMessage("Invalid Email!"),
+  check("password")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Password is required!")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters long!"),
+];
+
+module.exports = { validationCheck, validateRegisterData, validateLoginData };
