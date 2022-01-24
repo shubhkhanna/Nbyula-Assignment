@@ -27,6 +27,7 @@ app.use(express.json());
 
 // Routes
 app.use("/v1/api/auth", require("./routes/userRoutes"));
+app.use("/v1/api/courses", require("./routes/courseRoutes"));
 
 // Handle errors
 app.use(handleError);

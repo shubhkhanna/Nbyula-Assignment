@@ -35,4 +35,28 @@ const validateLoginData = [
     .withMessage("Password must be at least 6 characters long!"),
 ];
 
-module.exports = { validationCheck, validateRegisterData, validateLoginData };
+// Course Data Validation
+const validateCourseData = [
+  check("courseName")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Course Name is required!"),
+  check("courseDescription")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Course Description is required!"),
+  check("courseLevel")
+    .trim()
+    .not()
+    .isEmpty()
+    .withMessage("Course Level is required!"),
+];
+
+module.exports = {
+  validationCheck,
+  validateRegisterData,
+  validateLoginData,
+  validateCourseData,
+};
