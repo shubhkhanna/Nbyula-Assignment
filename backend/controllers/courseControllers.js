@@ -53,4 +53,52 @@ const createCourse = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getCourses, getCourseById, createCourse };
+// @desc   Update a course
+// @route   PUT /v1/api/courses/:id
+// @access Private/Teacher
+const updateCourse = asyncHandler(async (req, res) => {
+  // Get the course data from the request body
+  const { courseName, courseDescription, courseLevel } = req.body;
+
+  // Find the course by id
+  const course = await Course.findById(req.params.id);
+
+  if (course) {
+    course.courseName = courseName;
+    course.courseDescription = courseDescription;
+    course.courseLevel = courseLevel;
+
+    // Save the course
+    const updatedCourse = await course.save();
+
+    // Sending updated response
+    res.json(updatedCourse);
+  } else {
+    res.status(404);
+    throw new Error("Course not found!");
+  }
+});
+
+// @desc   Delete a course
+// @route   DELETE /v1/api/courses/:id
+// @access Private/Teacher
+const deleteCourse = asyncHandler(async (req, res) => {
+  // Find the course by id
+  const course = await Course.findById(req.params.id);
+
+  if (course) {
+    await course.remove();
+    res.json({ message: "Course Removed!" });
+  } else {
+    res.status(404);
+    throw new Error("Course not found!");
+  }
+});
+
+module.exports = {
+  getCourses,
+  getCourseById,
+  createCourse,
+  updateCourse,
+  deleteCourse,
+};
