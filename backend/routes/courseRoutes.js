@@ -3,6 +3,8 @@ const {
   getCourses,
   createCourse,
   getCourseById,
+  updateCourse,
+  deleteCourse,
 } = require("../controllers/courseControllers");
 const {
   protectMiddleware,
@@ -24,6 +26,10 @@ router
     validationCheck,
     createCourse
   );
-router.route("/:id").get(protectMiddleware, getCourseById);
+router
+  .route("/:id")
+  .get(protectMiddleware, getCourseById)
+  .put(protectMiddleware, isTeacher, updateCourse)
+  .delete(protectMiddleware, isTeacher, deleteCourse);
 
 module.exports = router;
