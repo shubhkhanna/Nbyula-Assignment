@@ -28,6 +28,7 @@ app.use(express.json());
 // Routes
 app.use("/v1/api/auth", require("./routes/userRoutes"));
 app.use("/v1/api/courses", require("./routes/courseRoutes"));
+app.use("/v1/api/quizzes", require("./routes/quizRoutes"));
 
 // Handle errors
 app.use(handleError);
