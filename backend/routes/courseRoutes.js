@@ -5,6 +5,7 @@ const {
   getCourseById,
   updateCourse,
   deleteCourse,
+  getCoursesByTeacher,
 } = require("../controllers/courseControllers");
 const {
   protectMiddleware,
@@ -31,5 +32,8 @@ router
   .get(protectMiddleware, getCourseById)
   .put(protectMiddleware, isTeacher, updateCourse)
   .delete(protectMiddleware, isTeacher, deleteCourse);
+router
+  .route("/teacher/:id")
+  .get(protectMiddleware, isTeacher, getCoursesByTeacher);
 
 module.exports = router;

@@ -88,10 +88,25 @@ const deleteCourse = asyncHandler(async (req, res) => {
 
   if (course) {
     await course.remove();
-    res.json({ message: "Course Removed!" });
+    res.json({ message: "Course deleted successfully!" });
   } else {
     res.status(404);
     throw new Error("Course not found!");
+  }
+});
+
+// @desc  Fetch all courses by a teacher
+// @route  GET /v1/api/courses/teacher/:id
+// @access Private/Teacher
+const getCoursesByTeacher = asyncHandler(async (req, res) => {
+  // Find the course by id
+  const courses = await Course.find({ courseInstructor: req.params.id });
+
+  if (courses) {
+    res.json(courses);
+  } else {
+    res.status(404);
+    throw new Error("No courses found!");
   }
 });
 
@@ -101,4 +116,5 @@ module.exports = {
   createCourse,
   updateCourse,
   deleteCourse,
+  getCoursesByTeacher,
 };
