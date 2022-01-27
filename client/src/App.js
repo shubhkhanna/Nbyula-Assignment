@@ -7,6 +7,8 @@ import Navbar from "./components/common/Navbar";
 import NotFound from "./pages/NotFound";
 import CourseDetailPage from "./pages/CourseDetailPage";
 import CourseCreatePage from "./pages/CourseCreatePage";
+import CourseListPage from "./pages/CourseListPage";
+import CourseEditPage from "./pages/CourseEditPage";
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
           <Route path="/" element={<CoursePage />} />
           <Route path="/course/:id" element={<CourseDetailPage />} />
           <Route path="/course/create" element={<CourseCreatePage />} />
+          <Route path="/course/list" element={<CourseListPage />} />
+          <Route path="/course/edit/:id" element={<CourseEditPage />} />
         </Route>
 
         {/* Public Routes */}
