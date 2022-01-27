@@ -5,6 +5,8 @@ import SignupPage from "./pages/SignupPage";
 import CoursePage from "./pages/CoursePage";
 import Navbar from "./components/common/Navbar";
 import NotFound from "./pages/NotFound";
+import CourseDetailPage from "./pages/CourseDetailPage";
+import CourseCreatePage from "./pages/CourseCreatePage";
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
         {/* Protected Routes */}
         <Route element={<Auth />}>
           <Route path="/" element={<CoursePage />} />
+          <Route path="/course/:id" element={<CourseDetailPage />} />
+          <Route path="/course/create" element={<CourseCreatePage />} />
         </Route>
 
         {/* Public Routes */}

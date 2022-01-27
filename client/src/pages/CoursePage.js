@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Card from "../components/common/Card";
+import Loader from "../components/common/Loader";
 import { courseList } from "../redux/actions/courseActions";
 
 const CoursePage = () => {
@@ -24,7 +25,7 @@ const CoursePage = () => {
       </h2>
 
       {loading ? (
-        <div className="text-center text-2xl mt-24">Loading...</div>
+        <Loader />
       ) : (
         <section>
           <div className="relative items-center w-full px-3 py-8 mx-auto lg:px-24 max-w-7xl">
