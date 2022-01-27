@@ -41,6 +41,7 @@ const Navbar = () => {
             {userInfo && userInfo.isTeacher && (
               <>
                 <Navlinks to="/course/create" title="Create Course" />
+                <Navlinks to="/course/list" title="My Courses" />
               </>
             )}
 
