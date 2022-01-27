@@ -9,7 +9,6 @@ import CourseDetailPage from "./pages/CourseDetailPage";
 import CourseCreatePage from "./pages/CourseCreatePage";
 import CourseListPage from "./pages/CourseListPage";
 import CourseEditPage from "./pages/CourseEditPage";
-import CourseCreatePage from "./pages/CourseCreatePage";
 
 const App = () => {
   return (
