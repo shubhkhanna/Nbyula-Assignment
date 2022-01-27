@@ -10,6 +10,9 @@ import {
   COURSE_GET_ERROR,
   COURSE_GET_REQUEST,
   COURSE_GET_SUCCESS,
+  COURSE_QUIZ_GET_ERROR,
+  COURSE_QUIZ_GET_REQUEST,
+  COURSE_QUIZ_GET_SUCCESS,
   TEACHER_COURSE_GET_ERROR,
   TEACHER_COURSE_GET_REQUEST,
   TEACHER_COURSE_GET_SUCCESS,
@@ -74,6 +77,23 @@ export const teacherCourseReducer = (state = { courses: [] }, action) => {
         courses: action.payload,
       };
     case TEACHER_COURSE_GET_ERROR:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+// Course Quiz
+export const getCourseQuizReducer = (state = { quizzes: [] }, action) => {
+  switch (action.type) {
+    case COURSE_QUIZ_GET_REQUEST:
+      return { loading: true, quizzes: [] };
+    case COURSE_QUIZ_GET_SUCCESS:
+      return {
+        loading: false,
+        quizzes: action.payload,
+      };
+    case COURSE_QUIZ_GET_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;

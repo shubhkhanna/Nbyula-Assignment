@@ -7,6 +7,7 @@ import {
   courseCreateReducer,
   teacherCourseReducer,
   courseDeleteReducer,
+  getCourseQuizReducer,
 } from "./reducers/courseReducers";
 
 // Combine all reducers
@@ -17,6 +18,7 @@ const reducer = combineReducers({
   courseCreate: courseCreateReducer,
   courseDelete: courseDeleteReducer,
   teacherCourseList: teacherCourseReducer,
+  courseQuiz: getCourseQuizReducer,
 });
 
 // Initial state of the user
