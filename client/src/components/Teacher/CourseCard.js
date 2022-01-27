@@ -31,6 +31,13 @@ const CourseCard = ({ item, onClick }) => {
         >
           Delete
         </button>
+
+        <Link
+          to={`/course/quiz/create/${item._id}`}
+          className="inline-flex float-right items-center mt-4 font-semibold text-blue-600 lg:mb-0 hover:text-neutral-600"
+        >
+          Add Quiz
+        </Link>
       </div>
     </div>
   );

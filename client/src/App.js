@@ -9,6 +9,7 @@ import CourseDetailPage from "./pages/CourseDetailPage";
 import CourseCreatePage from "./pages/CourseCreatePage";
 import CourseListPage from "./pages/CourseListPage";
 import CourseEditPage from "./pages/CourseEditPage";
+import CourseCreatePage from "./pages/CourseCreatePage";
 
 const App = () => {
   return (
@@ -22,6 +23,10 @@ const App = () => {
           <Route path="/course/create" element={<CourseCreatePage />} />
           <Route path="/course/list" element={<CourseListPage />} />
           <Route path="/course/edit/:id" element={<CourseEditPage />} />
+          <Route
+            path="/course/quiz/create/:id"
+            element={<CourseCreatePage />}
+          />
         </Route>
 
         {/* Public Routes */}
