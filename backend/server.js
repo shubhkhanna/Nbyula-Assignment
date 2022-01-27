@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
+const path = require("path");
 const db = require("./config/db");
 const PORT = process.env.PORT || 5000;
 
