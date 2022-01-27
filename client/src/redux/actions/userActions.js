@@ -8,6 +8,7 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_RESET,
   USER_REGISTER_SUCCESS,
+  USER_LOGIN_RESET,
 } from "../constants/userConstants";
 
 // Register user action
@@ -81,6 +82,10 @@ export const login = (email, password) => async (dispatch) => {
           ? error.response.data.message
           : error.message,
     });
+
+    setTimeout(() => {
+      dispatch({ type: USER_LOGIN_RESET });
+    }, 3000);
   }
 };
 
