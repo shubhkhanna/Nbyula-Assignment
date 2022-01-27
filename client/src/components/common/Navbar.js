@@ -40,8 +40,7 @@ const Navbar = () => {
             {/* Only teacher routes */}
             {userInfo && userInfo.isTeacher && (
               <>
-                <Navlinks to="/quiz/create" title="Create Quiz" />
-                <Navlinks to="/courses" title="Your Courses" />
+                <Navlinks to="/course/create" title="Create Course" />
               </>
             )}
 
