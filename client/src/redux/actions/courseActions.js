@@ -3,9 +3,15 @@ import {
   COURSE_CREATE_ERROR,
   COURSE_CREATE_REQUEST,
   COURSE_CREATE_SUCCESS,
+  COURSE_DELETE_ERROR,
+  COURSE_DELETE_REQUEST,
+  COURSE_DELETE_SUCCESS,
   COURSE_GET_ERROR,
   COURSE_GET_REQUEST,
   COURSE_GET_SUCCESS,
+  TEACHER_COURSE_GET_ERROR,
+  TEACHER_COURSE_GET_REQUEST,
+  TEACHER_COURSE_GET_SUCCESS,
 } from "../constants/courseConstants";
 import { logout } from "./userActions";
 
@@ -99,3 +105,89 @@ export const createCourse =
       });
     }
   };
+
+export const deleteCourse = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: COURSE_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.delete(`/v1/api/courses/${id}`, config);
+
+    dispatch({
+      type: COURSE_DELETE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (
+      message === "Token Expired!" ||
+      message === "Invalid Token!" ||
+      message === "Unauthorized Access, No Token Provided!"
+    ) {
+      dispatch(logout());
+    }
+
+    dispatch({
+      type: COURSE_DELETE_ERROR,
+      payload: message,
+    });
+  }
+};
+
+export const getCourseByTeacherId = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: TEACHER_COURSE_GET_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/v1/api/courses/teacher/${id}`, config);
+
+    dispatch({
+      type: TEACHER_COURSE_GET_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+
+    if (
+      message === "Token Expired!" ||
+      message === "Invalid Token!" ||
+      message === "Unauthorized Access, No Token Provided!"
+    ) {
+      dispatch(logout());
+    }
+
+    dispatch({
+      type: TEACHER_COURSE_GET_ERROR,
+      payload: message,
+    });
+  }
+};

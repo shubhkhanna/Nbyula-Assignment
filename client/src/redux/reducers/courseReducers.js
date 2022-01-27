@@ -5,10 +5,14 @@ import {
   COURSE_CREATE_SUCCESS,
   COURSE_DELETE_ERROR,
   COURSE_DELETE_REQUEST,
+  COURSE_DELETE_RESET,
   COURSE_DELETE_SUCCESS,
   COURSE_GET_ERROR,
   COURSE_GET_REQUEST,
   COURSE_GET_SUCCESS,
+  TEACHER_COURSE_GET_ERROR,
+  TEACHER_COURSE_GET_REQUEST,
+  TEACHER_COURSE_GET_SUCCESS,
 } from "../constants/courseConstants";
 
 export const courseListReducer = (state = { courses: [] }, action) => {
@@ -49,8 +53,27 @@ export const courseDeleteReducer = (state = {}, action) => {
     case COURSE_DELETE_REQUEST:
       return { loading: true };
     case COURSE_DELETE_SUCCESS:
-      return { loading: false, success: true };
+      return { loading: false, success: true, message: action.payload.message };
     case COURSE_DELETE_ERROR:
+      return { loading: false, error: action.payload };
+    case COURSE_DELETE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+// Teacher Course
+export const teacherCourseReducer = (state = { courses: [] }, action) => {
+  switch (action.type) {
+    case TEACHER_COURSE_GET_REQUEST:
+      return { loading: true, courses: [] };
+    case TEACHER_COURSE_GET_SUCCESS:
+      return {
+        loading: false,
+        courses: action.payload,
+      };
+    case TEACHER_COURSE_GET_ERROR:
       return { loading: false, error: action.payload };
     default:
       return state;

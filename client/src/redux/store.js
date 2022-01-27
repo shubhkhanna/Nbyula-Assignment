@@ -5,6 +5,8 @@ import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers";
 import {
   courseListReducer,
   courseCreateReducer,
+  teacherCourseReducer,
+  courseDeleteReducer,
 } from "./reducers/courseReducers";
 
 // Combine all reducers
@@ -13,6 +15,8 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   courseList: courseListReducer,
   courseCreate: courseCreateReducer,
+  courseDelete: courseDeleteReducer,
+  teacherCourseList: teacherCourseReducer,
 });
 
 // Initial state of the user
