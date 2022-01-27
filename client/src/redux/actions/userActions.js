@@ -45,6 +45,10 @@ export const register =
             ? error.response.data.message
             : error.message,
       });
+
+      setTimeout(() => {
+        dispatch({ type: USER_REGISTER_RESET });
+      }, 3000);
     }
   };
 

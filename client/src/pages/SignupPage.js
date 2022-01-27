@@ -4,6 +4,7 @@ import Button from "../components/common/Button";
 import Input from "../components/Input";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../redux/actions/userActions";
+import { toast } from "react-toastify";
 
 const SignupPage = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const SignupPage = () => {
   };
 
   const { userInfo } = useSelector((state) => state.userLogin);
+  const { error } = useSelector((state) => state.userRegister);
 
   const redirect = location.state?.path || "/";
 
@@ -31,7 +33,9 @@ const SignupPage = () => {
     if (userInfo) {
       navigate(redirect, { replace: true });
     }
-  }, [navigate, userInfo, redirect]);
+
+    if (error) toast.error(error);
+  }, [navigate, userInfo, redirect, error]);
 
   return (
     <div className="flex flex-col  min-h-screen justify-center items-center px-5 py-5 bg-gray-100">
