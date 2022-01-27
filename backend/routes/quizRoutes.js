@@ -25,7 +25,7 @@ router
 
 router
   .route("/:courseId")
-  .get(protectMiddleware, isTeacher, getQuizByCourseId)
+  .get(protectMiddleware, getQuizByCourseId)
   .post(protectMiddleware, isTeacher, createQuizByCourseId);
 
 module.exports = router;
