@@ -43,7 +43,7 @@ if (process.env.NODE_ENV === "prod") {
   );
 } else {
   app.get("/", (req, res) => {
-    res.status(200).json({ message: "Welcome to the ALP API" });
+    res.json({ message: "Welcome to the ALP API" });
   });
 }
 
