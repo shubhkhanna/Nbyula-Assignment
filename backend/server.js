@@ -33,17 +33,17 @@ app.use("/v1/api/auth", require("./routes/userRoutes"));
 app.use("/v1/api/courses", require("./routes/courseRoutes"));
 app.use("/v1/api/quizzes", require("./routes/quizRoutes"));
 
+// Serving Frontend Files
 if (process.env.NODE_ENV === "prod") {
-  // Set Static folder
-  // app.use(express.static(path.join(__dirname, "/client/build")));
-  app.use(express.static("client/build"));
+  // Set build folder as static
+  app.use(express.static(path.join(__dirname, "../client/build")));
 
   app.get("*", (req, res) =>
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+    res.sendFile(__dirname, "../", "client", "build", "index.html")
   );
 } else {
   app.get("/", (req, res) => {
-    res.send("API is running!");
+    res.status(200).json({ message: "Welcome to the ALP API" });
   });
 }
 
