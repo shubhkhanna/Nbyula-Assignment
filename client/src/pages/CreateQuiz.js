@@ -1,15 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../components/common/Button";
 import Input from "../components/Input";
+import { useDispatch, useSelector } from "react-redux";
+import { QUIZ_CREATE_RESET } from "../redux/constants/courseConstants";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { quizCreate } from "../redux/actions/courseActions";
 
 const CreateQuiz = () => {
   const [name, setName] = useState("");
   const [minPoints, setMinPoints] = useState();
   const [time, setTime] = useState();
 
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const { error, success, quiz } = useSelector((state) => state.createQuiz);
+
   const submitHandler = (e) => {
     e.preventDefault();
+
+    dispatch(quizCreate(id, name, minPoints, time));
   };
+
+  useEffect(() => {
+    dispatch({ type: QUIZ_CREATE_RESET });
+
+    if (success) {
+      setName("");
+      setMinPoints("");
+      setTime("");
+
+      return toast.success(`${quiz.name} quiz created successfully!`);
+    } else if (error) {
+      return toast.error(error);
+    }
+  }, [dispatch, success, error, quiz]);
 
   return (
     <div className="flex flex-col min-h-screen justify-center items-center px-5 py-5 bg-gray-100">

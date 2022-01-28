@@ -12,6 +12,9 @@ import {
   COURSE_QUIZ_GET_ERROR,
   COURSE_QUIZ_GET_REQUEST,
   COURSE_QUIZ_GET_SUCCESS,
+  QUIZ_CREATE_ERROR,
+  QUIZ_CREATE_REQUEST,
+  QUIZ_CREATE_SUCCESS,
   TEACHER_COURSE_GET_ERROR,
   TEACHER_COURSE_GET_REQUEST,
   TEACHER_COURSE_GET_SUCCESS,
@@ -213,8 +216,6 @@ export const getCourseQuizByCourseId = (id) => async (dispatch, getState) => {
 
     const { data } = await axios.get(`/v1/api/quizzes/${id}`, config);
 
-    console.log(data);
-
     dispatch({
       type: COURSE_QUIZ_GET_SUCCESS,
       payload: data,
@@ -239,3 +240,52 @@ export const getCourseQuizByCourseId = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const quizCreate =
+  (id, name, minPoints, time) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: QUIZ_CREATE_REQUEST,
+      });
+
+      const {
+        userLogin: { userInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.post(
+        `/v1/api/quizzes/${id}`,
+        { name, minPoints, time },
+        config
+      );
+
+      dispatch({
+        type: QUIZ_CREATE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+
+      if (
+        message === "Token Expired!" ||
+        message === "Invalid Token!" ||
+        message === "Unauthorized Access, No Token Provided!"
+      ) {
+        dispatch(logout());
+      }
+
+      dispatch({
+        type: QUIZ_CREATE_ERROR,
+        payload: message,
+      });
+    }
+  };
