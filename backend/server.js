@@ -34,7 +34,7 @@ app.use("/v1/api/courses", require("./routes/courseRoutes"));
 app.use("/v1/api/quizzes", require("./routes/quizRoutes"));
 
 // Serving Frontend Files
-if (process.env.NODE_ENV === "prod") {
+if (process.env.NODE_ENV === "production") {
   // Set build folder as static
   app.use(express.static(path.join(__dirname, "../client/build")));
 
